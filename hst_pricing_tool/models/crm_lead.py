@@ -9,5 +9,5 @@ class HSTLead(models.Model):
     #CRM Project Pricing Tools fields:
     project_id=fields.Many2one("project")
     project_manager_id=fields.Many2one("hr.employee")
-    selected_pricing=fields.Selection([("")])
+    selected_pricing=fields.Selection([("standard", "Standard Margins"), ("competitive", "Competitive Margins"), ("high", "High Margins")])
     selected_final_price=fields.Float()
