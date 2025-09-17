@@ -14,7 +14,10 @@
     "author": "Amr Mahadeen",
     "company": "Hamilton Smart Technologies",
     "maintainer": "Amr Mahadeen",
-    "depends": ["base", "project", "crm"],
+    "depends": ["base", "project", "crm", "hr"],
+    "data": [
+        "views/crm_lead_views.xml",
+    ],
     "license":"LGPL-3",
     "auto-install": True
 }
