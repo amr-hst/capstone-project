@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_lead_proposal,access_crm_lead_proposal,model_crm_lead_proposal,base.group_user,1,1,1,1
+access_direct_cost,access_direct_cost,model_direct_cost,base.group_user,1,1,1,1
+access_pricing_line,access_pricing_line,model_pricing_line,base.group_user,1,1,1,1

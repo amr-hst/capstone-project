@@ -7,13 +7,31 @@
         <field name="arch" type="xml">
             <xpath expr="//sheet//notebook" position="inside">
                 <page string="Proposal_1" name="first_proposal">
-                    
+                    <button name="action_create_first_proposal" string="Create Proposal" type="object" invisible="first_proposal_id"/>
+                    <group cols="1" colspan="1" nolabel="1" invisible="not first_proposal_id">
+                        <field name="first_proposal_id" nolabel="1"/>
+                        <separator string="Direct Costs"/>
+                        <field name="first_direct_price_ids" string="Direct Prices" nolabel="1"/>
+                        <separator string="Pricing Lines"/>
+                        <field name="first_pricing_line_ids" nolabel="1"/>
+                        <field name="first_overhead_margin" widget="percentage"/>
+                        <field name="first_profit_margin" widget="percentage"/>
+                        <field name="first_total_direct_cost"/>
+                        <field name="first_total_pricing_line"/>
+                    </group>
+                    <!-- <field name="crm_lead_proposal_ids"/> -->
                 </page>
                 <page string="Proposal_2" name="second_proposal">
-
+                    <button name="action_create_second_proposal" string="Create Proposal" type="object" invisible="second_proposal_id"/>
+                    <field name="second_proposal_id" invisible="not second_proposal_id"/>
+                    <field name="second_direct_price_ids" invisible="not second_proposal_id"/>
+                    <field name="second_pricing_line_ids" invisible="not second_proposal_id"/>
                 </page>
                 <page string="Proposal_3" name="third_proposal">
-
+                    <button name="action_create_third_proposal" string="Create Proposal" type="object" invisible="third_proposal_id"/>
+                    <field name="third_proposal_id" invisible="not third_proposal_id"/>
+                    <field name="third_direct_price_ids" invisible="not third_proposal_id"/>
+                    <field name="third_pricing_line_ids" invisible="not third_proposal_id"/>
                 </page>
                 <page name="project_plan" string="Project Plan">
                     <group>

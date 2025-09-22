@@ -17,6 +17,9 @@
     "depends": ["base", "project", "crm", "hr"],
     "data": [
         "views/crm_lead_views.xml",
+        "views/crm_lead_proposal_views.xml",
+        "views/crm_menu_views.xml",
+        "security/ir.model.access.csv",
     ],
     "license":"LGPL-3",
     "auto-install": True

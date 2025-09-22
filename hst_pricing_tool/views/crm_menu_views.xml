@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+    <menuitem
+    id="crm_menu_proposals"
+    name="Proposals"
+    parent="crm.crm_menu_root"
+    sequence="10"/>
+
+    <menuitem
+        id="crm_lead_proposal_menu_proposal"
+        name="Proposals"
+        parent="crm_menu_proposals"
+        action="hst_pricing_tool.crm_lead_proposal_action"
+        sequence="1"/>
+
+    <menuitem
+        id="crm_lead_proposal_menu_pricing_line"
+        name="Pricing Lines"
+        parent="crm_menu_proposals"
+        action="hst_pricing_tool.pricing_line_action"
+        sequence="3"/>
+
+    <menuitem
+        id="crm_lead_proposal_menu_direct_cost"
+        name="Direct Costs"
+        parent="crm_menu_proposals"
+        action="hst_pricing_tool.direct_cost_action"
+        sequence="2"/>
+</odoo>
