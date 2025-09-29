@@ -14,11 +14,12 @@
     "author": "Amr Mahadeen",
     "company": "Hamilton Smart Technologies",
     "maintainer": "Amr Mahadeen",
-    "depends": ["base", "project", "crm", "hr"],
+    "depends": ["base", "project", "crm", "hr", "timesheet_grid"],
     "data": [
         "views/crm_lead_views.xml",
         "views/crm_lead_proposal_views.xml",
         "views/crm_menu_views.xml",
+        "views/project_project_views.xml",
         "security/ir.model.access.csv",
     ],
     "license":"LGPL-3",

@@ -30,11 +30,46 @@
                 <field name="proposal_number"/>
                 <field name="direct_cost_ids"/>
                 <field name="pricing_line_ids"/>
-                <field name="overhead_margin"/>
+                <field name="overhead_fixed"/>
+                <field name="overhead_margin_fixed" invisible="not overhead_fixed"/>
+                <field name="overhead_margin_percentage" invisible="overhead_fixed"/>
                 <field name="profit_margin"/>
                 <field name="total_direct_cost"/>
                 <field name="total_pricing_line"/>
             </list>
+        </field>
+    </record>
+
+    <record id="crm_lead_proposal_view_form" model="ir.ui.view">
+        <field name="name">crm.lead.proposal.form</field>
+        <field name="model">crm.lead.proposal</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group cols="1" colspan="1" nolabel="1">
+                        <div class="oe_title" colspan="2">
+                            <h1>
+                                <field name="name" readonly="submitted"/>
+                            </h1>
+                        </div>
+                        <field name="crm_lead_id" readonly="1"/>
+                        <separator string="Direct Costs"/>
+                        <field name="direct_cost_ids" string="Direct Prices" nolabel="1" readonly="submitted"/>
+                        <separator string="Pricing Lines"/>
+                        <field name="pricing_line_ids" nolabel="1" readonly="submitted"/>
+                        <field name="overhead_fixed" readonly="submitted"/>
+                        <field name="overhead_margin_fixed" invisible="not overhead_fixed" readonly="submitted"/>
+                        <field name="overhead_margin_percentage" widget="percentage" invisible="overhead_fixed" readonly="submitted"/>
+                        <field name="profit_margin" widget="percentage" readonly="submitted"/>
+                        <field name="total_direct_cost" readonly="1"/>
+                        <field name="total_pricing_line" readonly="1"/>
+                        <field name="final_project_cost" readonly="1"/>
+                        <button name="action_submit" string="Submit" type="object" invisible="submitted"/>
+                        <button name="action_withdraw" string="Withdraw" type="object" invisible="not submitted"/>
+                        <field name="submitted" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 
@@ -46,6 +81,25 @@
                 <field name="name"/>
                 <field name="amount"/>
             </list>
+        </field>
+    </record>
+
+    <record id="direct_cost_view_form" model="ir.ui.view">
+        <field name="name">direct.cost.form</field>
+        <field name="model">direct.cost</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 
@@ -62,6 +116,31 @@
                 <field name="night_cost"/>
                 <field name="perdiem_cost"/>
             </list>
+        </field>
+    </record>
+    
+    <record id="pricing_line_view_form" model="ir.ui.view">
+        <field name="name">pricing.line.form</field>
+        <field name="model">pricing.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                        <group>
+                            <field name="hourly_cost"/>
+                        </group>
+                        <group>
+                            <field name="planned_hours"/>
+                            <field name="flight_cost"/>
+                            <field name="night_cost"/>
+                            <field name="perdiem_cost"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 

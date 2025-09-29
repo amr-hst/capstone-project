@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="project_view_form" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">form</field>
+        <field name="domain">[('project_id','=',context.get('active_project_id'))]</field>
+    </record>
+</odoo>

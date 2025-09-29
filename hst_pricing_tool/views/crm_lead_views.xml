@@ -5,41 +5,55 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="/form/header" position="inside">
+                <button name="action_project_create" type="object" string="Create" invisible="project_id"/>
+                <button name="action_project_view" type="object" string="View" context="{'active_project_id': project_id}" invisible="not project_id"/>
+            </xpath>
             <xpath expr="//sheet//notebook" position="inside">
                 <page string="Proposal_1" name="first_proposal">
-                    <button name="action_create_first_proposal" string="Create Proposal" type="object" invisible="first_proposal_id"/>
+                    <button name="action_create_proposal" string="Create Proposal" type="object" invisible="first_proposal_id" context="{'proposal_number': 'first'}"/>
                     <group cols="1" colspan="1" nolabel="1" invisible="not first_proposal_id">
                         <field name="first_proposal_id" nolabel="1"/>
                         <separator string="Direct Costs"/>
-                        <field name="first_direct_price_ids" string="Direct Prices" nolabel="1"/>
+                        <field name="first_direct_cost_ids" string="Direct Prices" nolabel="1" readonly="first_submitted"/>
                         <separator string="Pricing Lines"/>
-                        <field name="first_pricing_line_ids" nolabel="1"/>
-                        <field name="first_overhead_margin" widget="percentage"/>
-                        <field name="first_profit_margin" widget="percentage"/>
-                        <field name="first_total_direct_cost"/>
-                        <field name="first_total_pricing_line"/>
+                        <field name="first_pricing_line_ids" nolabel="1" readonly="first_submitted"/>
+                        <field name="first_overhead_fixed" readonly="first_submitted"/>
+                        <field name="first_overhead_margin_fixed" invisible="not first_overhead_fixed" readonly="first_submitted"/>
+                        <field name="first_overhead_margin_percentage" widget="percentage" invisible="first_overhead_fixed" readonly="first_submitted"/>
+                        <field name="first_profit_margin" widget="percentage" readonly="first_submitted"/>
+                        <field name="first_total_direct_cost" readonly="1"/>
+                        <field name="first_total_pricing_line" readonly="1"/>
+                        <field name="first_final_project_cost" readonly="1"/>
+                        <button name="action_submit" string="Submit" type="object" invisible="first_submitted" context="{'proposal_number': 'first'}"/>
+                        <button name="action_withdraw" string="Withdraw" type="object" invisible="not first_submitted or first_proposal_id == approved_proposal_id" context="{'proposal_number': 'first'}"/>
+                        <button name="action_approve_proposal" string="Approve" type="object" invisible="not first_submitted or first_proposal_id == approved_proposal_id" context="{'proposal_number': 'first'}"/>
+                        <button name="action_revoke_proposal" string="revoke" type="object" invisible="not first_proposal_id == approved_proposal_id"/>
+                        <field name="first_submitted" invisible="1"/>
                     </group>
-                    <!-- <field name="crm_lead_proposal_ids"/> -->
                 </page>
                 <page string="Proposal_2" name="second_proposal">
                     <button name="action_create_second_proposal" string="Create Proposal" type="object" invisible="second_proposal_id"/>
                     <field name="second_proposal_id" invisible="not second_proposal_id"/>
-                    <field name="second_direct_price_ids" invisible="not second_proposal_id"/>
+                    <field name="second_direct_cost_ids" invisible="not second_proposal_id"/>
                     <field name="second_pricing_line_ids" invisible="not second_proposal_id"/>
                 </page>
                 <page string="Proposal_3" name="third_proposal">
                     <button name="action_create_third_proposal" string="Create Proposal" type="object" invisible="third_proposal_id"/>
                     <field name="third_proposal_id" invisible="not third_proposal_id"/>
-                    <field name="third_direct_price_ids" invisible="not third_proposal_id"/>
+                    <field name="third_direct_cost_ids" invisible="not third_proposal_id"/>
                     <field name="third_pricing_line_ids" invisible="not third_proposal_id"/>
                 </page>
                 <page name="project_plan" string="Project Plan">
                     <group>
                         <group>
                             <field name="project_id"/>
-                            <field name="project_manager_id"/>
-                            <field name="selected_pricing"/>
-                            <field name="selected_final_price"/>
+                            <field name="project_manager_id" readonly="project_id"/>
+                            <field name="selected_pricing" readonly="stage_name=='Won'"/>
+                            <field name="selected_final_price" readonly="1"/>
+                            <field name="approved_proposal_id" readonly="1"/>
+                            <button name="action_revoke_proposal" string="Revoke" type="object" invisible="not approved_proposal_id"/>
+                            <field name="stage_name" invisible="1"/>
                         </group>
                         <group>
                             
