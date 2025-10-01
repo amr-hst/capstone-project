@@ -25,24 +25,56 @@
                         <field name="first_total_direct_cost" readonly="1"/>
                         <field name="first_total_pricing_line" readonly="1"/>
                         <field name="first_final_project_cost" readonly="1"/>
-                        <button name="action_submit" string="Submit" type="object" invisible="first_submitted" context="{'proposal_number': 'first'}"/>
-                        <button name="action_withdraw" string="Withdraw" type="object" invisible="not first_submitted or first_proposal_id == approved_proposal_id" context="{'proposal_number': 'first'}"/>
-                        <button name="action_approve_proposal" string="Approve" type="object" invisible="not first_submitted or first_proposal_id == approved_proposal_id" context="{'proposal_number': 'first'}"/>
-                        <button name="action_revoke_proposal" string="revoke" type="object" invisible="not first_proposal_id == approved_proposal_id"/>
+                        <button name="action_submit" string="Submit" type="object" invisible="first_submitted or project_id" context="{'proposal_number': 'first'}"/>
+                        <button name="action_withdraw" string="Withdraw" type="object" invisible="not first_submitted or first_proposal_id == approved_proposal_id or project_id" context="{'proposal_number': 'first'}"/>
+                        <button name="action_approve_proposal" string="Approve" type="object" invisible="not first_submitted or first_proposal_id == approved_proposal_id or project_id" context="{'proposal_number': 'first'}"/>
+                        <button name="action_revoke_proposal" string="revoke" type="object" invisible="not first_proposal_id == approved_proposal_id or project_id"/>
                         <field name="first_submitted" invisible="1"/>
                     </group>
                 </page>
                 <page string="Proposal_2" name="second_proposal">
-                    <button name="action_create_second_proposal" string="Create Proposal" type="object" invisible="second_proposal_id"/>
-                    <field name="second_proposal_id" invisible="not second_proposal_id"/>
-                    <field name="second_direct_cost_ids" invisible="not second_proposal_id"/>
-                    <field name="second_pricing_line_ids" invisible="not second_proposal_id"/>
+                    <button name="action_create_proposal" string="Create Proposal" type="object" invisible="second_proposal_id" context="{'proposal_number': 'second'}"/>
+                    <group cols="1" colspan="1" nolabel="1" invisible="not second_proposal_id">
+                        <field name="second_proposal_id" nolabel="1"/>
+                        <separator string="Direct Costs"/>
+                        <field name="second_direct_cost_ids" string="Direct Prices" nolabel="1" readonly="second_submitted"/>
+                        <separator string="Pricing Lines"/>
+                        <field name="second_pricing_line_ids" nolabel="1" readonly="second_submitted"/>
+                        <field name="second_overhead_fixed" readonly="second_submitted"/>
+                        <field name="second_overhead_margin_fixed" invisible="not second_overhead_fixed" readonly="second_submitted"/>
+                        <field name="second_overhead_margin_percentage" widget="percentage" invisible="second_overhead_fixed" readonly="second_submitted"/>
+                        <field name="second_profit_margin" widget="percentage" readonly="second_submitted"/>
+                        <field name="second_total_direct_cost" readonly="1"/>
+                        <field name="second_total_pricing_line" readonly="1"/>
+                        <field name="second_final_project_cost" readonly="1"/>
+                        <button name="action_submit" string="Submit" type="object" invisible="second_submitted or project_id" context="{'proposal_number': 'second'}"/>
+                        <button name="action_withdraw" string="Withdraw" type="object" invisible="not second_submitted or second_proposal_id == approved_proposal_id or project_id" context="{'proposal_number': 'second'}"/>
+                        <button name="action_approve_proposal" string="Approve" type="object" invisible="not second_submitted or second_proposal_id == approved_proposal_id or project_id" context="{'proposal_number': 'second'}"/>
+                        <button name="action_revoke_proposal" string="revoke" type="object" invisible="not second_proposal_id == approved_proposal_id or project_id"/>
+                        <field name="second_submitted" invisible="1"/>
+                    </group>
                 </page>
                 <page string="Proposal_3" name="third_proposal">
-                    <button name="action_create_third_proposal" string="Create Proposal" type="object" invisible="third_proposal_id"/>
-                    <field name="third_proposal_id" invisible="not third_proposal_id"/>
-                    <field name="third_direct_cost_ids" invisible="not third_proposal_id"/>
-                    <field name="third_pricing_line_ids" invisible="not third_proposal_id"/>
+                    <button name="action_create_proposal" string="Create Proposal" type="object" invisible="third_proposal_id" context="{'proposal_number': 'third'}"/>
+                    <group cols="1" colspan="1" nolabel="1" invisible="not third_proposal_id">
+                        <field name="third_proposal_id" nolabel="1"/>
+                        <separator string="Direct Costs"/>
+                        <field name="third_direct_cost_ids" string="Direct Prices" nolabel="1" readonly="third_submitted"/>
+                        <separator string="Pricing Lines"/>
+                        <field name="third_pricing_line_ids" nolabel="1" readonly="third_submitted"/>
+                        <field name="third_overhead_fixed" readonly="third_submitted"/>
+                        <field name="third_overhead_margin_fixed" invisible="not third_overhead_fixed" readonly="third_submitted"/>
+                        <field name="third_overhead_margin_percentage" widget="percentage" invisible="third_overhead_fixed" readonly="third_submitted"/>
+                        <field name="third_profit_margin" widget="percentage" readonly="third_submitted"/>
+                        <field name="third_total_direct_cost" readonly="1"/>
+                        <field name="third_total_pricing_line" readonly="1"/>
+                        <field name="third_final_project_cost" readonly="1"/>
+                        <button name="action_submit" string="Submit" type="object" invisible="third_submitted or project_id" context="{'proposal_number': 'third'}"/>
+                        <button name="action_withdraw" string="Withdraw" type="object" invisible="not third_submitted or third_proposal_id == approved_proposal_id or project_id" context="{'proposal_number': 'third'}"/>
+                        <button name="action_approve_proposal" string="Approve" type="object" invisible="not third_submitted or third_proposal_id == approved_proposal_id or project_id" context="{'proposal_number': 'third'}"/>
+                        <button name="action_revoke_proposal" string="revoke" type="object" invisible="not third_proposal_id == approved_proposal_id or project_id"/>
+                        <field name="third_submitted" invisible="1"/>
+                    </group>
                 </page>
                 <page name="project_plan" string="Project Plan">
                     <group>
@@ -52,7 +84,7 @@
                             <field name="selected_pricing" readonly="stage_name=='Won'"/>
                             <field name="selected_final_price" readonly="1"/>
                             <field name="approved_proposal_id" readonly="1"/>
-                            <button name="action_revoke_proposal" string="Revoke" type="object" invisible="not approved_proposal_id"/>
+                            <button name="action_revoke_proposal" string="Revoke" type="object" invisible="not approved_proposal_id or project_id"/>
                             <field name="stage_name" invisible="1"/>
                         </group>
                         <group>

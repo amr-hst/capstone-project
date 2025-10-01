@@ -160,13 +160,14 @@ class HSTLead(models.Model):
             record.approved_proposal_id=False
     
     def action_project_create(self):
-        for record in self:
-            if not record.project_id and record.project_manager_id:
-                record.project_id=record.env['project.project'].create([{'name': f'{record.name}\'s project'}])
-            elif record.project_id:
-                raise ValidationError('Lead already has a project attached to it, a lead can only have one project.')
-            else:
-                raise ValidationError('A project_manager_id must be assigned before the project is created.')
+        self.ensure_one()
+        if not self.project_id and self.project_manager_id:
+            self.project_id=self.env['project.project'].create([{'name': f'{self.name}\'s project'}])
+            return self.action_project_view()
+        elif self.project_id:
+            raise ValidationError('Lead already has a project attached to it, a lead can only have one project.')
+        else:
+            raise ValidationError('A project_manager_id must be assigned before the project is created.')
     
     def action_project_view(self):
         self.ensure_one()
@@ -180,3 +181,9 @@ class HSTLead(models.Model):
     #             super().action_set_won_rainbowman()
     #         else:
     #             raise ValidationError('User must select a pricing option before marking opportunity as "Won".')
+    
+    # ONCHANGES:
+    @api.onchange('project_id')
+    def _onchange_project_id(self):
+        if self.project_id:
+            self.project_id.user_id=self.project_manager_id
