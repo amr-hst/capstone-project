@@ -79,7 +79,7 @@
                 <page name="project_plan" string="Project Plan">
                     <group>
                         <group>
-                            <field name="project_id"/>
+                            <!-- <field name="project_id"/> -->
                             <field name="project_manager_id" readonly="project_id"/>
                             <field name="selected_pricing" readonly="stage_name=='Won'"/>
                             <field name="selected_final_price" readonly="1"/>
