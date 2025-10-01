@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="/form/header" position="inside">
-                <button name="action_project_create" type="object" string="Create" invisible="project_id"/>
+                <button name="action_project_create" type="object" string="Create" invisible="project_id or not approved_proposal_id"/>
                 <button name="action_project_view" type="object" string="View" context="{'active_project_id': project_id}" invisible="not project_id"/>
             </xpath>
             <xpath expr="//sheet//notebook" position="inside">
