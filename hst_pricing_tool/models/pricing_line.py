@@ -2,17 +2,16 @@ from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 class PricingLine(models.Model):
-    _name='pricing.line'
+    _name = 'pricing.line'
+    _description = 'Pricing Line'
 
-    crm_lead_proposal_id=fields.Many2one('crm.lead.proposal', ondelete='cascade')
-    employee_id=fields.Many2one('hr.employee', string='Assigned Employee')
-    hourly_cost=fields.Float(string='Employee Hourly Rate', compute='_compute_hourly_cost')
-    # currency_id=fields.Many2one(related='employee_id.currency_id')
-    # hourly_cost=fields.Monetary(related='employee_id.hourly_cost', currency_field='currency_id', string='Employee Hourly Rate')
-    planned_hours=fields.Integer(string='Estimated Hours')
-    flight_cost=fields.Float(string='Travel Expense')
-    night_cost=fields.Float(string='Hotel Cost')
-    perdiem_cost=fields.Float(string='Daily Allowance')
+    crm_lead_proposal_id = fields.Many2one('crm.lead.proposal', ondelete='cascade')
+    employee_id = fields.Many2one('hr.employee', string='Assigned Employee')
+    hourly_cost = fields.Float(string='Employee Hourly Rate', compute='_compute_hourly_cost')
+    planned_hours = fields.Integer(string='Estimated Hours')
+    flight_cost = fields.Float(string='Travel Expense')
+    night_cost = fields.Float(string='Hotel Cost')
+    perdiem_cost = fields.Float(string='Daily Allowance')
 
     @api.constrains('employee_id')
     def _check_employee_id(self):
@@ -49,14 +48,8 @@ class PricingLine(models.Model):
         for record in self:
             if record.perdiem_cost < 0:
                 raise ValidationError('A pricing line\'s perdiem_cost cannot be negative')
-    
-#     hourly_cost
-# planned_hours
-# flight_cost
-# night_cost
-# perdiem_cost
 
     @api.depends('employee_id.hourly_cost')
     def _compute_hourly_cost(self):
         for record in self:
-            record.hourly_cost=record.employee_id.hourly_cost
+            record.hourly_cost = record.employee_id.hourly_cost
