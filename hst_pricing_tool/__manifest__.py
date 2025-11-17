@@ -1,6 +1,6 @@
 {
     "name": "HST Pricing Tool",
-    "version": "18.0.1.0,0",
+    "version": "18.0.1.0.0",
     "category": "Hidden",
     "summary": """Odoo 18 CRM, Odoo 18 Project, Odoo 18 CRM Leads, Odoo18 CRM, Odoo18 Project, Odoo crm, Odoo project, Odoo18, CRM, Project, Odoo Apps""",
     "description": """Odoo 18 CRM & Project, a comprehensive CRM Project Pricing Tools module that integrates project management capabilities with advanced pricing calculations within Odoo 18.
